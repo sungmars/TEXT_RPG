@@ -330,5 +330,63 @@ namespace Text_RPG_Console
             }
         }
 
+        // 메인 메서드
+        static void Main(string[] args)
+        {
+            Player player = new Player();
+            Inventory I = new Inventory();
+            Manager m = new Manager(player);
+            Status s = new Status(player, I);
+
+            m.HelloPlayer();
+            while (true)
+            {
+                m.Start();
+                switch (m.num)
+                {
+                    case 1:
+                        while (true)
+                        {
+                            s.status();
+                            switch (s.num)
+                            {
+                                case 0:
+                                    goto EndStatusLoop;
+                                default:
+                                    Console.WriteLine("잘못된 입력입니다.");
+                                    continue;
+                            }
+                        }
+                    EndStatusLoop:
+                        break;
+                    case 2:
+                        while (true)
+                        {
+                            I.Showinven();
+                            switch (I.num)
+                            {
+                                case 1:
+                                    I.Equipment();
+                                    break;
+                                case 2:
+                                    goto EndInventoryLoop;
+                                default:
+                                    Console.WriteLine("잘못된 입력입니다.");
+                                    continue;
+                            }
+                        }
+                    EndInventoryLoop:
+                        break;
+                    case 3:
+                        // 상점 실행
+                        Shop shop = new Shop(player, I);
+                        shop.ShopManager();
+                        break;
+                    default:
+                        Console.WriteLine("잘못된 입력입니다.");
+                        continue;
+                }
+            }
+        }
     }
 }
