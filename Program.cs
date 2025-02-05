@@ -5,7 +5,7 @@ namespace Text_RPG_Console
 {
     internal class Text_RPG
     {
-        // 플레이어 클래스
+        // 플레이어 클래스 생성
         class Player
         {
             public string name { get; set; } = "";
